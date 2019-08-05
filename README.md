@@ -24,6 +24,7 @@ As mentioned above, I kept the header and footer as static HTML components but w
 
 - I could have changed the scrollbar to show up permanently when the list expands over 900px instead of showing the scrollbar on hover. However, I couldn’t find the option to disable auto-hide on the scrollbar.
 
+- I could have made the web app 100% viewport height. This would have added a little more complexity in terms of making it responsive on all devices.
 
 ## Disclaimer:
 - This is a test project I built to showcase my knowledge.
