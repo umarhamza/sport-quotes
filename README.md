@@ -31,6 +31,11 @@ As mentioned above, I kept the header and footer as static HTML components but w
 - I built the app myself based on a design I was given.
 - This is not my designs or idea.
 
+## The Demo 
+[Click here to see the Demo](https://objective-wescoff-2a34ea.netlify.com/)
+
+## The Technology
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
