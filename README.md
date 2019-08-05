@@ -1,5 +1,5 @@
-##Note:
-- This is a test project I built for Sportlabs.
+## Note:
+- This is a test project I built to showcase my knowledge.
 - I built the app myself based on a design I was given.
 - This is not my designs or idea.
 
