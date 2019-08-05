@@ -15,10 +15,7 @@ class Form extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.validation.status === 'success') {
-            console.log('success');
-            setTimeout(() => this.setState({ validation: {status: ''}}), 3000);
-        }
+
     }
 
     hangleToggleForm = (e) => {
@@ -47,7 +44,14 @@ class Form extends Component {
 
         let validation = ( quote === '' || author === '' ) ? { status: 'error', message: 'Please fill in the all fields.' } : {status: 'success', message: 'Success! Your quote has been added.'};
 
-        this.setState({validation});
+        this.setState({
+            validation
+        }, () => {
+            if (this.state.validation.status === 'success') {
+                setTimeout(() => this.setState({ validation: { status: '' } }), 2000);
+                this.setState({ content:{quote:'', author:''} });
+            }
+        });
     }
 
     render() {
@@ -61,6 +65,7 @@ class Form extends Component {
                     <label htmlFor="quote" className="quote-form--label">Quote</label>
                     <TextareaAutosize 
                         onChange={this.handleChange} 
+                        value={this.state.content.quote}
                         type="text" id="quote" 
                         className="quote-form--input" 
                         style={{resize: 'none'}}
@@ -71,6 +76,7 @@ class Form extends Component {
                     <label htmlFor="author" className="quote-form--label">Person</label>
                     <input 
                         onChange={this.handleChange} 
+                        value={this.state.content.author}
                         type="text" 
                         id="author" 
                         className="quote-form--input" 
