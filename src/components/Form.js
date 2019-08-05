@@ -14,10 +14,6 @@ class Form extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
     hangleToggleForm = (e) => {
         e.preventDefault();
         this.setState(prevState => ({
@@ -29,29 +25,31 @@ class Form extends Component {
         const {id, value} = e.target;
         const initstate = this.state.content;
 
-        if ( value.trim() ) {
-            this.setState({
-                content: {...initstate, [id]: value}
-            })
-        }
+        this.setState({
+            content: {...initstate, [id]: value}
+        })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addQuote(this.state);
 
         const { quote, author } = this.state.content;
+        const hasContent = !(quote === '' || author === '');
+        const validation = hasContent ? { status: 'success', message: 'Success! Your quote has been added.' } : { status: 'error', message: 'Please fill in the all fields.' };
 
-        let validation = ( quote === '' || author === '' ) ? { status: 'error', message: 'Please fill in the all fields.' } : {status: 'success', message: 'Success! Your quote has been added.'};
+        (hasContent) ? (
+            this.props.addQuote(this.state)
+        ) : (
+            this.setState({
+                validation
+            }, () => {
+                if (this.state.validation.status === 'success') {
+                    setTimeout(() => this.setState({ validation: { status: '' } }), 2000);
+                    this.setState({ content: { quote: '', author: '' } });
+                }
+            })
+        );
 
-        this.setState({
-            validation
-        }, () => {
-            if (this.state.validation.status === 'success') {
-                setTimeout(() => this.setState({ validation: { status: '' } }), 2000);
-                this.setState({ content:{quote:'', author:''} });
-            }
-        });
     }
 
     render() {
