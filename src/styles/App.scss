@@ -24,7 +24,7 @@ h1 {
     font-size: 40px;
 
     @include bp(992px) {
-        font-size: 50px;
+        font-size: 45px;
     }
 } // h1
 
@@ -83,7 +83,7 @@ button {
     color: $primary;
     border: 2px solid $primary;
     border-radius: 3px; 
-    padding: 10px 13px;
+    padding: 8px 13px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
@@ -128,7 +128,7 @@ button {
 }
 
 .header {
-    padding: 100px 0;
+    padding: 125px 0 100px;
     background-image: url('../images/header.jpg');
     background-repeat: no-repeat; 
     background-position: center;
@@ -161,7 +161,7 @@ button {
 .App {
     position: relative;
     overflow: hidden;
-    min-height: 880px;
+    min-height: 745px;
 
     padding-top: 40px;
     padding-bottom: 50px;
@@ -206,10 +206,15 @@ button {
     height: 100%;
 } // form / list
 
+%form-min-height {
+    min-height: 310px;
+}
+
 .quote-form {
+    @extend %form-min-height;
+
     padding: 20px 20px 24px;
     font-size: 14px;
-    min-height: 320px;
 
     @include bp(992px) {
         padding: 30px 30px 34px;
@@ -217,7 +222,7 @@ button {
     } // bp
 
     &--title {
-        font-size: 19px;
+        font-size: 17px;
         margin-bottom: 18px;
         vertical-align: top;
         color: #555555;
@@ -250,7 +255,8 @@ button {
 } // form-validation
 
 .list {
-    min-height: 320px;
+    @extend %form-min-height;
+    
     padding: 28px 26px 34px;
 
     .list-item {
