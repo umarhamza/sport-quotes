@@ -1,0 +1,88 @@
+import React, { Component } from 'react';
+import TextareaAutosize from 'react-autosize-textarea';
+
+class Form extends Component {
+    state = {
+        show: false,
+        content: {
+            quote: '',
+            author: '',
+        },
+        validation: {
+            status: '',
+            message: '',
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.validation.status === 'success') {
+            console.log('success');
+            setTimeout(() => this.setState({ validation: {status: ''}}), 3000);
+        }
+    }
+
+    hangleToggleForm = (e) => {
+        e.preventDefault();
+        this.setState(prevState => ({
+            show: !prevState.show
+        }));
+    }
+
+    handleChange = (e) => {
+        const {id, value} = e.target;
+        const initstate = this.state.content;
+
+        if ( value.trim() ) {
+            this.setState({
+                content: {...initstate, [id]: value}
+            })
+        }
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.addQuote(this.state);
+
+        const { quote, author } = this.state.content;
+
+        let validation = ( quote === '' || author === '' ) ? { status: 'error', message: 'Please fill in the all fields.' } : {status: 'success', message: 'Success! Your quote has been added.'};
+
+        this.setState({validation});
+    }
+
+    render() {
+        const formMessage = this.state.validation.status ? (<div className={`form-validation ${this.state.validation.status}`}>{this.state.validation.message}</div>) : '';
+
+        return (
+            <div className="Form">
+                <button onClick={this.hangleToggleForm} id="js-toggle-form" className="toggle-form">{this.state.show ? 'Hide Form' : 'Add New Quote'}</button>
+                <form onSubmit={this.handleSubmit} style={{ display: `${this.state.show ? 'block' : 'none'}`}} id="add-quote-form" className="quote-form">
+                    <h2 className="quote-form--title">Add a new quote</h2>
+                    <label htmlFor="quote" className="quote-form--label">Quote</label>
+                    <TextareaAutosize 
+                        onChange={this.handleChange} 
+                        type="text" id="quote" 
+                        className="quote-form--input" 
+                        style={{resize: 'none'}}
+                        maxRows={10}
+                        placeholder="Type in or paste quote."
+                        required
+                    />
+                    <label htmlFor="author" className="quote-form--label">Person</label>
+                    <input 
+                        onChange={this.handleChange} 
+                        type="text" 
+                        id="author" 
+                        className="quote-form--input" 
+                        placeholder="Type in author name." 
+                        required
+                    />
+                    <button id="submit-form" className="quote-form--button">Submit</button>
+                    { formMessage }
+                </form>
+            </div>
+        )
+    }
+}
+
+export default Form;

@@ -1,0 +1,24 @@
+// VARIABLES =========
+$site-width: 990px;
+
+$primary: #2688e1;
+$secondary: #23b294;
+$light-gray: #c2c2c2;
+
+
+// MIXINS ============
+@mixin bp($point:480px) {
+    @media (min-width: $point) { @content ; }
+}
+
+@mixin maxbp($point:481px) {
+    @media (max-width: ($point - 1px)) { @content ; }
+}
+
+@mixin headings($from: 1, $to: 6){
+    @for $i from $from through $to{
+      h#{$i}{
+        @content
+      }
+    }
+}
