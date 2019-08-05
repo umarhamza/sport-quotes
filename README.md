@@ -22,6 +22,8 @@ As mentioned above, I kept the header and footer as static HTML components but w
 
 - I could have tweaked webpack to compile the SCSS into CSS and then load the CSS into the HTML. But since this is just a test web app, I didn’t see the need to over complicate it.
 
+- I could have added a small link below the list to clear the list or even added a link beside each quote to delete them individually.
+
 - I could have changed the scrollbar to show up permanently when the list expands over 900px instead of showing the scrollbar on hover. However, I couldn’t find the option to disable auto-hide on the scrollbar.
 
 - I could have made the web app 100% viewport height. This would have added a little more complexity in terms of making it responsive on all devices.
