@@ -26,12 +26,6 @@ class Main extends Component {
         });
     }
 
-    toggleForm = () => {
-        this.setState(prevState => ({
-            showForm: !prevState.showForm
-        }));
-    }
-
     render() {
         return (
             <div className="Main">

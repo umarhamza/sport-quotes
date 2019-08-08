@@ -37,23 +37,21 @@ class Form extends Component {
         const hasContent = !(quote === '' || author === '');
         const validation = hasContent ? { status: 'success', message: 'Success! Your quote has been added.' } : { status: 'error', message: 'Please fill in the all fields.' };
 
-        (hasContent) ? (
-            this.props.addQuote(this.state)
-        ) : (
-            this.setState({
-                validation
-            }, () => {
-                if (this.state.validation.status === 'success') {
-                    setTimeout(() => this.setState({ validation: { status: '' } }), 2000);
-                    this.setState({ content: { quote: '', author: '' } });
-                }
-            })
-        );
+        if(hasContent) (this.props.addQuote(this.state));
+        
+        this.setState({
+            validation
+        }, () => {
+            if (this.state.validation.status === 'success') {
+                setTimeout(() => this.setState({ validation: { status: '' } }), 2000);
+                this.setState({ content: { quote: '', author: '' } });
+            }
+        });
 
     }
 
     render() {
-        const formMessage = this.state.validation.status ? (<div className={`form-validation ${this.state.validation.status}`}>{this.state.validation.message}</div>) : '';
+        const formMessage = this.state.validation.status !== '' ? (<div className={`form-validation ${this.state.validation.status}`}>{this.state.validation.message}</div>) : '';
 
         return (
             <div className="Form">
@@ -69,7 +67,7 @@ class Form extends Component {
                         style={{resize: 'none'}}
                         maxRows={10}
                         placeholder="Type in or paste quote."
-                        required
+                        // required
                     />
                     <label htmlFor="author" className="quote-form--label">Person</label>
                     <input 
@@ -79,7 +77,7 @@ class Form extends Component {
                         id="author" 
                         className="quote-form--input" 
                         placeholder="Type in author name." 
-                        required
+                        // required
                     />
                     <button id="submit-form" className="quote-form--button">Submit</button>
                     { formMessage }
